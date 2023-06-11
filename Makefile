@@ -16,6 +16,8 @@ SRCFOLDER_OBJ := $(subst src,obj,$(OBJ_MID))
 
 SRCFOLDER_HEADERS := $(shell find src -type f -name "*$(FILE_EXTENSION_H)")
 
+CLEAN_TARGETS := $(SRCFOLDER_OBJ) $(EXEC_TARGET)
+
 .PHONY: all
 all: build
 
@@ -34,6 +36,10 @@ build: $(EXEC_TARGET)
 .PHONY: run
 run:
 	$(EXEC_TARGET)
+
+.PHONY: clean
+clean:
+	@rm $(CLEAN_TARGETS)
 
 $(EXEC_TARGET): $(SRCFOLDER_OBJ)
 	$(CL) $(CLFLAGS) -o $(EXEC_TARGET) $(SRCFOLDER_OBJ)
